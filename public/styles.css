@@ -1,0 +1,115 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+  }
+  
+  h1 {
+    color: #333;
+  }
+  
+  form {
+    margin-bottom: 20px;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .message-container {
+    background-color: white;
+    border-radius: 10px;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  
+  .message-container:nth-child(odd) {
+    background-color: #e0f7fa;
+  }
+  
+  .message-container:nth-child(even) {
+    background-color: #ffebee;
+  }
+  
+  .message-container p {
+    margin: 5px 0;
+  }
+  
+  .message-container .timestamp {
+    font-size: 0.8em;
+    color: #555;
+  }
+  
+  .message-container .user {
+    font-weight: bold;
+    color: green;
+  }
+  
+  form.send-message {
+    border: 2px solid red;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: white;
+    margin-top: 20px;
+  }
+  
+  form.send-message label {
+    display: block;
+    margin: 5px 0;
+  }
+  
+  form.send-message input[type="text"],
+  form.send-message select {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+  }
+  
+  form.send-message button {
+    background-color: green;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  form.send-message button:hover {
+    background-color: darkgreen;
+  }
+  
+  .bubble {
+    position: relative;
+    display: inline-block;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: white;
+    border: 1px solid #ddd;
+  }
+  
+  .bubble:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10px;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-bottom-color: #ddd;
+    border-top: 0;
+    border-right: 0;
+    margin-left: -5px;
+    margin-top: -10px;
+  }
+  
+  .bubble p {
+    margin: 0;
+  }
+  
+  .bubble .timestamp {
+    font-size: 0.8em;
+    color: #555;
+  }
+  

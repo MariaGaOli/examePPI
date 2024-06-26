@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bate-papo</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <h1>Bate-papo</h1>
+  <ul>
+    <% messages.forEach(msg => { %>
+      <li class="bubble">
+        <p class="user"><%= msg.usuario %>:</p>
+        <p><%= msg.mensagem %></p>
+        <p class="timestamp">postado em: <%= msg.timestamp %></p>
+      </li>
+    <% }); %>
+  </ul>
+  <form class="send-message" method="POST" action="/postarMensagem">
+    <label for="usuario">Usuário:</label>
+    <select name="usuario" id="usuario" required>
+      <% users.forEach(user => { %>
+        <option value="<%= user.nickname %>"><%= user.nickname %></option>
+      <% }); %>
+    </select>
+    <br>
+    <label for="mensagem">Mensagem:</label>
+    <input type="text" name="mensagem" id="mensagem" required>
+    <br>
+    <button type="submit">Enviar</button>
+    <% if (typeof error !== 'undefined') { %>
+      <p style="color:red;"><%= error %></p>
+    <% } %>
+  </form>
+  <a href="/">Voltar ao Menu</a>
+</body>
+</html>
