@@ -23,6 +23,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Middleware para verificar se o usuário está logado
 function checkLogin(req, res, next) {
   if (req.session.user) {
     next();
@@ -31,14 +32,17 @@ function checkLogin(req, res, next) {
   }
 }
 
+// Rota para a página inicial (menu)
 app.get('/', checkLogin, (req, res) => {
   res.render('menu', { lastAccess: req.cookies.lastAccess });
 });
 
+// Rota para a página de login
 app.get('/login', (req, res) => {
   res.render('login');
 });
 
+// Rota para processar o login
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
   if (username === 'admin' && password === 'password') {
@@ -50,15 +54,18 @@ app.post('/login', (req, res) => {
   }
 });
 
+// Rota para logout
 app.get('/logout', (req, res) => {
   req.session.destroy();
   res.redirect('/login');
 });
 
+// Rota para a página de cadastro de usuários
 app.get('/cadastroUsuario.html', checkLogin, (req, res) => {
   res.render('cadastroUsuario', { users });
 });
 
+// Rota para processar o cadastro de usuários
 app.post('/cadastrarUsuario', checkLogin, (req, res) => {
   const { nome, dataNascimento, nickname } = req.body;
   if (nome && dataNascimento && nickname) {
@@ -69,10 +76,12 @@ app.post('/cadastrarUsuario', checkLogin, (req, res) => {
   }
 });
 
+// Rota para a página de bate-papo
 app.get('/batePapo', checkLogin, (req, res) => {
   res.render('batePapo', { users, messages });
 });
 
+// Rota para processar o envio de mensagens
 app.post('/postarMensagem', checkLogin, (req, res) => {
   const { usuario, mensagem } = req.body;
   if (usuario && mensagem) {
