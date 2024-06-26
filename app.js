@@ -32,7 +32,10 @@ function checkLogin(req, res, next) {
 }
 
 app.get('/', checkLogin, (req, res) => {
-  res.render('menu', { lastAccess: req.cookies.lastAccess });
+  const lastAccess = req.cookies.lastAccess;
+  const currentAccess = new Date().toLocaleString();
+  res.cookie('lastAccess', currentAccess);
+  res.render('menu', { lastAccess });
 });
 
 app.get('/login', (req, res) => {
@@ -43,7 +46,8 @@ app.post('/login', (req, res) => {
   const { username, password } = req.body;
   if (username === 'admin' && password === 'password') {
     req.session.user = username;
-    res.cookie('lastAccess', new Date().toLocaleString());
+    const currentAccess = new Date().toLocaleString();
+    res.cookie('lastAccess', currentAccess);
     res.redirect('/');
   } else {
     res.render('login', { error: 'Credenciais inválidas' });
